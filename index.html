@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Ian Harker の 【PORTFOLIO】</title>
+	<link href="layout.css" rel="stylesheet" type="text/css">
+	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<script src="https://code.jquery.com/color/jquery.color-2.1.2.min.js"></script>
+	<script src="https://player.vimeo.com/api/player.js"></script>
+	<script>
+	$(document).ready(function() {
+	  // Transform element to center and enlarge when clicked
+	  var ti = 1; //from-top index
+	  var li = 1; //from-left index
+	  var pcon = false;
+	  var se = null;
+	  $(".portfolio_element").click(function() {
+	    se = $(this);
+	    // Place the main container way in front
+		$(this).css('z-index', 100);
+	    // Darken the background and place it right behind the main container
+	    $(".page-cover").css('z-index', 2);
+	    $(".page-cover").animate({
+	      backgroundColor: 'rgba(0,0,0,0.66)'
+	    }, {
+	      duration: 1000,
+	      queue: false
+	    });
+		  
+		var tc = "-32px"; // top coordinate for anim
+	    var lc = "-0px"; // left coordinate
+
+	    // Keep track of which element position was clicked.
+	    if ($(this).attr('tabIndex') <= 3) { //top row
+	      ti = 0;
+	      li = $(this).attr('tabIndex') - 1;
+	    } else { //bottom row
+	      ti = 1;
+	      tc = "-404px";
+	      li = $(this).attr('tabIndex') - 4;
+	    }
+
+	    
+
+	    //enlarge selected main container
+	    $(this).animate({
+	      left: lc,
+	      top: tc,
+	      backgroundColor: 'rgba(127,127,127,1)',
+	      "background-size": "100% 100%",
+	      width: "1448px",
+	      height: "815px"
+	    }, {
+	      duration: 100
+	    });
+
+	    // unhide and enlarge iframe container
+	    $(this).find("div").css("visibility", "visible");
+		$(this).find("div").css('z-index', 999);
+		pcon=true;
+	  });
+
+	  // Return to original size and position
+	  $(".page-cover").click(function() {
+		if(pcon==true){
+			//Unfade
+			$(this).css('z-index', -1);
+
+			//Unload and the Vimeo Player + container
+			var vplayer = new Vimeo.Player($(se).find("iframe"));
+			vplayer.unload();
+			se.find("div").css("visibility", "hidden");
+			se.find("div").css('z-index', -999);
+			//Return the main container to its original state
+			se.css('z-index', 1);
+			se.animate({
+			  top: 0,
+			  left: 0 + (484 * li),
+			  backgroundColor: 'rgba(255,255,255,1)',
+			  "background-size": "100% 100%",
+			  width: "480px",
+			  height: "360px",
+			}, {
+			  duration: 100,
+			  queue: false
+			});
+			$(this).animate({
+			  backgroundColor: 'rgba(0,0,0,0)'
+			}, {
+			  duration: 500,
+			  queue: false
+			});
+		  pcon=false;
+		}
+	  });
+
+	});
+		
+	</script>
+</head>
+
+<body>
+  <div class="page-cover"></div>
+  <div id="menu">
+    <div id="menu_title">Ian Harker の 【PORTFOLIO】</div>
+    <div id="menu_title_shadow"></div>
+    <div id="menu_links">
+	  <ul>
+		  <li><a href="index.html" title="Home">Home</a></li>
+		  <li><a href="about.html" title="About Me">About Me</a></li>
+		  <li><a href="contact.html" title="Contact">Contact</a></li>
+	  </ul>
+	  </div>
+  </div>
+  <div id="container">
+  <div id="content">
+    <div class="row">
+      <div class="portfolio_element" id="e1" tabIndex="1" style="left: 0px; background-image:url('img/3DArtistDemo.jpg');background-size: 100% 100%; background-repeat: no-repeat;">
+        <div class="video">
+          <iframe id="player1" src="https://player.vimeo.com/video/168487819?color=ff0179&byline=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+        </div>
+      </div>
+      <div class="portfolio_element" id="e2" tabIndex="2" style="left: 484px; background-image:url('img/EssenceJapan.jpg');background-size: 100% 100%; background-repeat: no-repeat;">
+      	<div class="video">
+			<iframe id="player2" src="https://player.vimeo.com/video/157986171?color=ff0179&byline=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+     	</div>
+      </div>
+      <div class="portfolio_element" id="e3" tabIndex="3" style="left: 968px; background-image:url('img/Demigeist.jpg');background-size: 100% 100%; background-repeat: no-repeat;">
+      	<div class="video">
+			<iframe id="player3" src="https://player.vimeo.com/video/97684046?color=ff0179&byline=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+     	</div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="portfolio_element" id="e4" tabIndex="4" style="left: 0px; background-image:url('img/CrayonNinja.jpg');background-size: 100% 100%; background-repeat: no-repeat;">
+      	<div class="video">
+			<iframe id="player4" src="https://player.vimeo.com/video/80350451?color=ff0179&byline=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+     	</div>
+      </div>
+      <div class="portfolio_element" id="e5" tabIndex="5" style="left: 484px; background-image:url('img/LDReel.jpg');background-size: 100% 100%; background-repeat: no-repeat;">
+      	<div class="video">
+			<iframe id="player5" src="https://player.vimeo.com/video/177004090?color=ff0179&byline=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+     	</div>
+      </div>
+      <div class="portfolio_element" id="e6" tabIndex="6" style="left: 968px; background-image:url('img/SlugNSnail.jpg');background-size: 100% 100%; background-repeat: no-repeat;">
+      	<div class="video">
+			<iframe id="player6" src="https://player.vimeo.com/video/146961437?color=ff0179&byline=0" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+     	</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+<footer>Copyright&copy; 2016 Ian Harker. All rights reserved.</footer>
+</html>
